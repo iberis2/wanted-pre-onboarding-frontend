@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { emailPasswordValidation } from '../lib/validation'
 
-const emailRegex = /@/
-const passwordRegex = /^.{8,}$/
 export default function SignUp() {
+  const navigate = useNavigate()
   const [inputValue, setInputValue] = useState({
     email: '',
     password: '',
@@ -14,7 +15,7 @@ export default function SignUp() {
   }
 
   const handleKeyUp = () => {
-    if (emailRegex.test(inputValue.email) && passwordRegex.test(inputValue.password)) {
+    if (emailPasswordValidation(inputValue.email, inputValue.password)) {
       setBtnDisabled(false)
     } else {
       setBtnDisabled(true)
@@ -23,7 +24,7 @@ export default function SignUp() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
+    navigate('/signin')
     console.log('IV', inputValue)
   }
 
