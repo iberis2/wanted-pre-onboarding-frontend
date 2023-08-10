@@ -26,3 +26,12 @@ export const updateTodo = async (id: number, todo: string, isCompleted: boolean)
     alert('수정에 실패했습니다. 잠시후 다시 시도해주세요')
   }
 }
+
+export const deleteTodo = async (id: number) => {
+  try {
+    const response = await axiosInstance.delete(`/todos/${id}`)
+    return response.status
+  } catch {
+    alert('삭제에 실패했습니다. 잠시후 다시 시도해주세요')
+  }
+}

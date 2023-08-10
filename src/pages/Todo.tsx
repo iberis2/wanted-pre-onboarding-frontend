@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import TodoItem from '../components/Todo/TodoItem'
 import AddTodo, { TodoItemType } from '../components/Todo/AddTodo'
-import { getTodos, updateTodo } from '../apis/todo'
+import { deleteTodo, getTodos, updateTodo } from '../apis/todo'
 import { TodoType } from '../components/Todo/AddTodo'
 
 export default function Todo() {
@@ -14,6 +14,13 @@ export default function Todo() {
 
   const addTodo = (newTodo: TodoItemType) => {
     setTodos(pre => [...pre, newTodo])
+  }
+
+  const handleDelete = async (id: number) => {
+    const status = await deleteTodo(id)
+    if (status === 204) {
+      setTodos(pre => pre.filter(todo => todo.id !== id))
+    }
   }
 
   useEffect(() => {
@@ -31,6 +38,7 @@ export default function Todo() {
               initialTodo={todo.todo}
               initialCompleted={todo.isCompleted}
               handleUpdate={(task, isCompleted) => updateTodo(todo.id, task, isCompleted)}
+              handleDelete={() => handleDelete(todo.id)}
             />
           ))
         ) : (

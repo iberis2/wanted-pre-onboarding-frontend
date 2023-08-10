@@ -4,8 +4,14 @@ type TodoItemProps = {
   initialTodo: string
   initialCompleted: boolean
   handleUpdate: (task: string, isCompleted: boolean) => Promise<number | undefined>
+  handleDelete: () => void
 }
-export default function TodoItem({ initialTodo, initialCompleted, handleUpdate }: TodoItemProps) {
+export default function TodoItem({
+  initialTodo,
+  initialCompleted,
+  handleUpdate,
+  handleDelete,
+}: TodoItemProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [task, setTask] = useState(initialTodo)
   const [isCompleted, setIsCompleted] = useState(initialCompleted)
@@ -64,7 +70,7 @@ export default function TodoItem({ initialTodo, initialCompleted, handleUpdate }
           <button type='button' data-testid='modify-button' onClick={() => setIsEditing(true)}>
             수정
           </button>
-          <button type='button' data-testid='delete-button'>
+          <button type='button' data-testid='delete-button' onClick={handleDelete}>
             삭제
           </button>
         </>
