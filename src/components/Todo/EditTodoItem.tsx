@@ -1,3 +1,5 @@
+import styles from './EditTodoItem.module.css'
+
 type EditTodoItemProps = {
   handleUpdate: (task: string, isCompleted: boolean) => Promise<number | undefined>
   task: string
@@ -29,27 +31,36 @@ export default function EditTodoItem({
   }
 
   return (
-    <form onSubmit={EditTodo}>
-      <label>
+    <form onSubmit={EditTodo} className={styles.form}>
+      <label className={styles.label}>
         <input
           name='checkbox'
           type='checkbox'
           defaultChecked={isCompleted}
           onChange={handleIsChecked}
+          className={styles.checkbox}
         />
         <input
           name='todo'
           value={task}
           onChange={handleTodoInputChange}
           data-testid='modify-input'
+          className={styles.input}
         />
       </label>
-      <button type='submit' data-testid='submit-button'>
-        제출
-      </button>
-      <button type='button' data-testid='cancel-button' onClick={cancelEdit}>
-        취소
-      </button>
+      <div className={styles.buttonBox}>
+        <button type='submit' data-testid='submit-button' className={styles.editButton}>
+          제출
+        </button>
+        <button
+          type='button'
+          data-testid='cancel-button'
+          onClick={cancelEdit}
+          className={styles.deleteButton}
+        >
+          취소
+        </button>
+      </div>
     </form>
   )
 }

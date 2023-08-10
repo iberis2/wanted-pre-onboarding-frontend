@@ -3,6 +3,7 @@ import TodoItem from '../components/Todo/TodoItem'
 import AddTodo, { TodoItemType } from '../components/Todo/AddTodo'
 import { deleteTodo, getTodos, updateTodo } from '../apis/todo'
 import { TodoType } from '../components/Todo/AddTodo'
+import styles from './Todo.module.css'
 
 export default function Todo() {
   const [todos, setTodos] = useState<TodoType>([])
@@ -28,9 +29,9 @@ export default function Todo() {
   }, [])
 
   return (
-    <div>
+    <div className={styles.todo}>
       <AddTodo addTodo={addTodo} />
-      <ul>
+      <ul className={styles.ul}>
         {todos?.length ? (
           todos.map(todo => (
             <TodoItem
@@ -42,7 +43,7 @@ export default function Todo() {
             />
           ))
         ) : (
-          <div>
+          <div className={styles.noList}>
             등록된 할 일이 없습니다. <br /> 새로운 할 일을 추가해 보세요!
           </div>
         )}

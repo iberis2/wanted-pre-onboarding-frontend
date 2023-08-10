@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import EditTodoItem from './EditTodoItem'
+import styles from './TodoItem.module.css'
 
 type TodoItemProps = {
   initialTodo: string
@@ -25,7 +26,7 @@ export default function TodoItem({
   }
 
   return (
-    <li>
+    <li className={styles.li}>
       {isEditing ? (
         <EditTodoItem
           handleUpdate={handleUpdate}
@@ -37,16 +38,33 @@ export default function TodoItem({
         />
       ) : (
         <>
-          <label>
-            <input type='checkbox' defaultChecked={isCompleted} onChange={handleIsChecked} />
-            <span>{task}</span>
+          <label className={styles.label}>
+            <input
+              type='checkbox'
+              defaultChecked={isCompleted}
+              onChange={handleIsChecked}
+              className={styles.checkbox}
+            />
+            <span className={styles.task}>{task}</span>
           </label>
-          <button type='button' data-testid='modify-button' onClick={() => setIsEditing(true)}>
-            수정
-          </button>
-          <button type='button' data-testid='delete-button' onClick={handleDelete}>
-            삭제
-          </button>
+          <div className={styles.buttonBox}>
+            <button
+              type='button'
+              data-testid='modify-button'
+              onClick={() => setIsEditing(true)}
+              className={styles.editButton}
+            >
+              수정
+            </button>
+            <button
+              type='button'
+              data-testid='delete-button'
+              onClick={handleDelete}
+              className={styles.deleteButton}
+            >
+              삭제
+            </button>
+          </div>
         </>
       )}
     </li>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { createTodo } from '../../apis/todo'
+import styles from './AddTodo.module.css'
 
 export type TodoItemType = {
   id: number
@@ -29,9 +30,15 @@ export default function AddTodo({ addTodo }: AddTodoProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input data-testid='new-todo-input' value={newTodo} onChange={handleChange} />
-      <button type='submit' data-testid='new-todo-add-button'>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <input
+        data-testid='new-todo-input'
+        value={newTodo}
+        onChange={handleChange}
+        placeholder='할 일을 입력해주세요'
+        className={styles.input}
+      />
+      <button type='submit' data-testid='new-todo-add-button' className={styles.button}>
         추가
       </button>
     </form>
