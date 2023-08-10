@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios'
 import { axiosInstance } from './instance'
+import { saveTokenToLocalStorage } from '../lib/tokenHandler'
 
 type SignParamsType = {
   email: string
@@ -25,6 +26,7 @@ export const signIn = async ({ email, password }: SignParamsType) => {
       email,
       password,
     })
+    saveTokenToLocalStorage(`Bearer ${response.data.access_token}`)
     return response
   } catch (error: unknown) {
     const axiosError = error as AxiosError

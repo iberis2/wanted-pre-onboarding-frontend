@@ -1,4 +1,10 @@
 import axios, { InternalAxiosRequestConfig } from 'axios'
+import { getTokenFromLocalStorage } from '../lib/tokenHandler'
+
+const setAccessTokenOnHeader = (config: InternalAxiosRequestConfig) => {
+  config.headers.Authorization = getTokenFromLocalStorage() || ''
+  return config
+}
 
 type Options = {
   baseURL: string
@@ -14,6 +20,7 @@ function createAxiosInstance() {
   }
 
   const instance = axios.create(instanceOptions)
+  instance.interceptors.request.use(setAccessTokenOnHeader)
   return instance
 }
 
