@@ -33,8 +33,8 @@ export default function Todo() {
           todos.map(todo => (
             <TodoItem
               key={todo.id}
-              todo={todo.todo}
-              isCompleted={todo.isCompleted}
+              initialTodo={todo.todo}
+              initialCompleted={todo.isCompleted}
               handleUpdate={(task, isCompleted) => updateTodo(todo.id, task, isCompleted)}
             />
           ))
