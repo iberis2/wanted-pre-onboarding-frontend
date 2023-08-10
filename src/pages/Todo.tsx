@@ -1,14 +1,8 @@
 import { useEffect, useState } from 'react'
 import TodoItem from '../components/Todo/TodoItem'
-import AddTodo from '../components/Todo/AddTodo'
+import AddTodo, { TodoItemType } from '../components/Todo/AddTodo'
 import { getTodos } from '../apis/todo'
-
-type TodoType = {
-  id: number
-  todo: string
-  isCompleted: boolean
-  userId: number
-}[]
+import { TodoType } from '../components/Todo/AddTodo'
 
 export default function Todo() {
   const [todos, setTodos] = useState<TodoType>([])
@@ -23,14 +17,18 @@ export default function Todo() {
     }
   }
 
+  const addTodo = (newTodo: TodoItemType) => {
+    setTodos(pre => [newTodo, ...pre])
+  }
+
   useEffect(() => {
     getTodoList()
   }, [])
 
   return (
     <div>
-      <AddTodo />
-      <ol>
+      <AddTodo addTodo={addTodo} />
+      <ul>
         {todos.length ? (
           todos.map(todo => (
             <TodoItem key={todo.id} todo={todo.todo} isCompleted={todo.isCompleted} />
@@ -40,7 +38,7 @@ export default function Todo() {
             등록된 할 일이 없습니다. <br /> 새로운 할 일을 추가해 보세요!
           </div>
         )}
-      </ol>
+      </ul>
     </div>
   )
 }
