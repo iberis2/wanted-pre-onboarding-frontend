@@ -2,12 +2,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 150px 50px;
+  padding: 150px 50px 0 50px;
   height: 100%;
 }
 
 .ul {
   width: 100%;
+  height: 100%;
   list-style-type: none;
   padding-top: 20px;
+}
+
+.noList {
+  text-align: center;
+  color: #91c8e4;
+  font-size: 2rem;
+  height: 100%;
+  padding-top: 150px;
 }
