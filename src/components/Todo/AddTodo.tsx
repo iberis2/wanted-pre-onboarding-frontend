@@ -20,6 +20,7 @@ export default function AddTodo({ addTodo }: AddTodoProps) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    if (!newTodo) return alert('한 글자 이상 입력해주세요')
     const data = await createTodo(newTodo)
     addTodo(data)
     setNewTodo('')
