@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styles from './EditTodoItem.module.css'
 
 type EditTodoItemProps = {
@@ -6,7 +7,7 @@ type EditTodoItemProps = {
   setTask: React.Dispatch<React.SetStateAction<string>>
   isCompleted: boolean
   handleIsChecked: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>
-  cancelEdit: () => void
+  closeEdit: () => void
 }
 
 export default function EditTodoItem({
@@ -15,18 +16,20 @@ export default function EditTodoItem({
   setTask,
   isCompleted,
   handleIsChecked,
-  cancelEdit,
+  closeEdit,
 }: EditTodoItemProps) {
+  const [editTask, setEditTask] = useState(task)
+
   const handleTodoInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTask(event.target.value)
+    setEditTask(event.target.value)
   }
 
   const EditTodo = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
-    const status = await handleUpdate(task, isCompleted)
+    setTask(editTask)
+    const status = await handleUpdate(editTask, isCompleted)
     if (status === 200) {
-      cancelEdit()
+      closeEdit()
     }
   }
 
@@ -42,7 +45,7 @@ export default function EditTodoItem({
         />
         <input
           name='todo'
-          value={task}
+          value={editTask}
           onChange={handleTodoInputChange}
           data-testid='modify-input'
           className={styles.input}
@@ -55,7 +58,7 @@ export default function EditTodoItem({
         <button
           type='button'
           data-testid='cancel-button'
-          onClick={cancelEdit}
+          onClick={closeEdit}
           className={styles.deleteButton}
         >
           취소

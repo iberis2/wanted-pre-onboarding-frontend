@@ -34,7 +34,7 @@ export default function TodoItem({
           setTask={setTask}
           isCompleted={isCompleted}
           handleIsChecked={handleIsChecked}
-          cancelEdit={() => setIsEditing(false)}
+          closeEdit={() => setIsEditing(false)}
         />
       ) : (
         <>
