@@ -1,6 +1,5 @@
 import { Suspense, lazy } from 'react'
 
-const Home = lazy(() => import('../pages/Home'))
 const SingIn = lazy(() => import('../pages/SignIn'))
 const SingUp = lazy(() => import('../pages/SignUp'))
 const Todo = lazy(() => import('../pages/Todo'))
@@ -9,6 +8,7 @@ type RouterDataType = {
   id: number
   path: string
   element: React.ReactNode
+  withAuth: boolean
 }
 
 export const routerData: RouterDataType[] = [
@@ -17,9 +17,10 @@ export const routerData: RouterDataType[] = [
     path: '/',
     element: (
       <Suspense fallback={<div>loading...</div>}>
-        <Home />
+        <Todo />
       </Suspense>
     ),
+    withAuth: true,
   },
   {
     id: 1,
@@ -29,6 +30,7 @@ export const routerData: RouterDataType[] = [
         <SingIn />
       </Suspense>
     ),
+    withAuth: false,
   },
   {
     id: 2,
@@ -38,6 +40,7 @@ export const routerData: RouterDataType[] = [
         <SingUp />
       </Suspense>
     ),
+    withAuth: false,
   },
   {
     id: 3,
@@ -47,5 +50,6 @@ export const routerData: RouterDataType[] = [
         <Todo />
       </Suspense>
     ),
+    withAuth: true,
   },
 ]
