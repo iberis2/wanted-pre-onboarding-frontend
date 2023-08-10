@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { emailPasswordValidation } from '../lib/validation'
+import { signUp } from '../apis/auth'
 
 export default function SignUp() {
   const navigate = useNavigate()
@@ -22,10 +23,14 @@ export default function SignUp() {
     }
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    const response = await signUp(inputValue)
+    if (response?.status !== 201) {
+      alert('회원가입에 실패했습니다. 잠시 후 다시 시도해주세요')
+    }
     navigate('/signin')
-    console.log('IV', inputValue)
   }
 
   return (
