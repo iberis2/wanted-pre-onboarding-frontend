@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import TodoItem from '../components/Todo/TodoItem'
 import AddTodo, { TodoItemType } from '../components/Todo/AddTodo'
-import { getTodos } from '../apis/todo'
+import { getTodos, updateTodo } from '../apis/todo'
 import { TodoType } from '../components/Todo/AddTodo'
 
 export default function Todo() {
@@ -31,7 +31,12 @@ export default function Todo() {
       <ul>
         {todos.length ? (
           todos.map(todo => (
-            <TodoItem key={todo.id} todo={todo.todo} isCompleted={todo.isCompleted} />
+            <TodoItem
+              key={todo.id}
+              todo={todo.todo}
+              isCompleted={todo.isCompleted}
+              handleUpdate={(task, isCompleted) => updateTodo(todo.id, task, isCompleted)}
+            />
           ))
         ) : (
           <div>

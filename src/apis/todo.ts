@@ -20,3 +20,13 @@ export const createTodo = async (todo: string) => {
     return axiosError.response
   }
 }
+
+export const updateTodo = async (id: number, todo: string, isCompleted: boolean) => {
+  try {
+    const response = await axiosInstance.put(`/todos/${id}`, { todo, isCompleted })
+    return response
+  } catch (error: unknown) {
+    const axiosError = error as AxiosError
+    return axiosError.response
+  }
+}
