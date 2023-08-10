@@ -52,14 +52,14 @@ export default function EditTodoItem({
         />
       </label>
       <div className={styles.buttonBox}>
-        <button type='submit' data-testid='submit-button' className={styles.editButton}>
+        <button type='submit' data-testid='submit-button' className={styles.submitButton}>
           제출
         </button>
         <button
           type='button'
           data-testid='cancel-button'
           onClick={closeEdit}
-          className={styles.deleteButton}
+          className={styles.cancelButton}
         >
           취소
         </button>

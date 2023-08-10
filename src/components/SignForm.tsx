@@ -77,7 +77,7 @@ export default function SignForm({ type = '회원가입' }: SignFormType) {
       />
       <button
         type='submit'
-        data-testid='signup-button'
+        data-testid={type === '회원가입' ? 'signup-button' : 'signin-button'}
         disabled={btnDisabled}
         className={btnDisabled ? styles.disabledBtn : styles.button}
       >

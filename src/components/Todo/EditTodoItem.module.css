@@ -16,6 +16,7 @@
 .checkbox {
   height: 50px;
   width: 50px;
+  cursor: pointer;
 }
 .input {
   font-size: 2rem;
@@ -37,13 +38,22 @@
   border-radius: 5px;
   font-size: 1.6rem;
   font-weight: 700;
+  cursor: pointer;
 }
 
-.editButton {
+.submitButton {
   background-color: #4682a9;
   margin-right: 20px;
 }
 
-.deleteButton {
+.submitButton:hover {
+  background-color: #91c8e4;
+}
+
+.cancelButton {
   background-color: #c70039;
+}
+
+.cancelButton:hover {
+  background-color: tomato;
 }

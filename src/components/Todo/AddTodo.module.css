@@ -35,3 +35,8 @@
   font-size: 1.6rem;
   font-weight: 700;
 }
+
+.button:hover {
+  background-color: #4682a9;
+  cursor: pointer;
+}

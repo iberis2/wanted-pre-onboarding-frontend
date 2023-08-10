@@ -9,10 +9,12 @@
 .label {
   display: inline-flex;
   align-items: center;
+  cursor: pointer;
 }
 .checkbox {
   height: 50px;
   width: 50px;
+  cursor: pointer;
 }
 .task {
   margin-left: 20px;
@@ -28,6 +30,7 @@
   border-radius: 5px;
   font-size: 1.6rem;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .editButton {
@@ -35,6 +38,14 @@
   margin-right: 20px;
 }
 
+.editButton:hover {
+  background-color: #91c8e4;
+}
+
 .deleteButton {
   background-color: #c70039;
+}
+
+.deleteButton:hover {
+  background-color: tomato;
 }
