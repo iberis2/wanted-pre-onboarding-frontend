@@ -4,7 +4,6 @@ type Options = {
   baseURL: string
   timeout: number
   headers: { 'Content-Type': string }
-  withCredentials: boolean
 }
 
 function createAxiosInstance() {
@@ -12,7 +11,6 @@ function createAxiosInstance() {
     baseURL: 'https://www.pre-onboarding-selection-task.shop',
     timeout: 3000,
     headers: { 'Content-Type': 'application/json' },
-    withCredentials: true,
   }
 
   const instance = axios.create(instanceOptions)

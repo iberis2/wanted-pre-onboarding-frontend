@@ -1,3 +1,5 @@
+import SignForm from '../components/SignForm'
+
 export default function SignIn() {
-  return <div>signIn</div>
+  return <SignForm type='로그인' />
 }

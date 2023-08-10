@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { emailPasswordValidation } from '../lib/validation'
-import { signUp } from '../apis/auth'
+import { signIn, signUp } from '../apis/auth'
 
 type SignFormType = {
   type: '로그인' | '회원가입'
@@ -30,14 +30,28 @@ export default function SignForm({ type = '회원가입' }: SignFormType) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    const response = await signUp(inputValue)
-    const { status }: { status: number } = response!
-    if (status === 201) {
-      navigate('/signin')
-    } else if (status === 200) {
-      navigate('/todo')
-    } else {
-      alert(`${type}을 실패했습니다. 잠시 후 다시 시도해주세요`)
+    if (type === '회원가입') {
+      const response = await signUp(inputValue)
+      const { status, data }: { status: number; data: { message: string } } = response!
+      if (status === 201) {
+        navigate('/signin')
+      } else if (status === 400) {
+        alert(data.message)
+      } else {
+        alert('회원가입에 실패했습니다. 잠시 후 다시 시도해주세요')
+      }
+      return
+    }
+
+    if (type === '로그인') {
+      const response = await signIn(inputValue)
+      const { status }: { status: number } = response!
+      if (status === 200) {
+        navigate('/todo')
+      } else {
+        alert('로그인에 실패했습니다. 잠시 후 다시 시도해주세요')
+      }
+      return
     }
   }
 
