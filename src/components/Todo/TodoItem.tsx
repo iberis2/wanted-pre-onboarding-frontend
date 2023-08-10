@@ -1,19 +1,20 @@
-import { AxiosResponse } from 'axios'
 import { useState } from 'react'
 
 type TodoItemProps = {
   initialTodo: string
   initialCompleted: boolean
-  handleUpdate: (task: string, isCompleted: boolean) => Promise<AxiosResponse<any, any> | undefined>
+  handleUpdate: (task: string, isCompleted: boolean) => Promise<number | undefined>
 }
 export default function TodoItem({ initialTodo, initialCompleted, handleUpdate }: TodoItemProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [task, setTask] = useState(initialTodo)
   const [isCompleted, setIsCompleted] = useState(initialCompleted)
 
-  const handleIsChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsCompleted(event.target.checked)
-    handleUpdate(task, event.target.checked)
+  const handleIsChecked = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const status = await handleUpdate(task, event.target.checked)
+    if (status === 200) {
+      setIsCompleted(event.target.checked)
+    }
   }
 
   const handleTodoInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,13 +26,9 @@ export default function TodoItem({ initialTodo, initialCompleted, handleUpdate }
 
     const target = event.target as HTMLFormElement
     const isChecked = target.checkbox.checked
-
-    const response = await handleUpdate(task, isChecked)
-    const { status }: { status: number } = response!
+    const status = await handleUpdate(task, isChecked)
     if (status === 200) {
       setIsEditing(false)
-    } else {
-      alert('수정에 실패했습니다. 잠시후 다시 시도해주세요')
     }
   }
 

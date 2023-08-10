@@ -31,25 +31,17 @@ export default function SignForm({ type = '회원가입' }: SignFormType) {
     event.preventDefault()
 
     if (type === '회원가입') {
-      const response = await signUp(inputValue)
-      const { status, data }: { status: number; data: { message: string } } = response!
+      const status = await signUp(inputValue)
       if (status === 201) {
         navigate('/signin')
-      } else if (status === 400) {
-        alert(data.message)
-      } else {
-        alert('회원가입에 실패했습니다. 잠시 후 다시 시도해주세요')
       }
       return
     }
 
     if (type === '로그인') {
-      const response = await signIn(inputValue)
-      const { status }: { status: number } = response!
+      const status = await signIn(inputValue)
       if (status === 200) {
         navigate('/todo')
-      } else {
-        alert('로그인에 실패했습니다. 잠시 후 다시 시도해주세요')
       }
       return
     }

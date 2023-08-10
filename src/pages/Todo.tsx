@@ -8,17 +8,12 @@ export default function Todo() {
   const [todos, setTodos] = useState<TodoType>([])
 
   const getTodoList = async () => {
-    const response = await getTodos()
-    const { status, data }: { status: number; data: TodoType } = response!
-    if (status === 200) {
-      setTodos(data)
-    } else {
-      alert('todo list를 불러오는데 실패했습니다. 잠시 후 다시 시도해주세요')
-    }
+    const data = await getTodos()
+    setTodos(data)
   }
 
   const addTodo = (newTodo: TodoItemType) => {
-    setTodos(pre => [newTodo, ...pre])
+    setTodos(pre => [...pre, newTodo])
   }
 
   useEffect(() => {
@@ -29,7 +24,7 @@ export default function Todo() {
     <div>
       <AddTodo addTodo={addTodo} />
       <ul>
-        {todos.length ? (
+        {todos?.length ? (
           todos.map(todo => (
             <TodoItem
               key={todo.id}

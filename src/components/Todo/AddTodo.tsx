@@ -19,14 +19,9 @@ export default function AddTodo({ addTodo }: AddTodoProps) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const response = await createTodo(newTodo)
-    const { status, data }: { status: number; data: TodoItemType } = response!
-    if (status === 201) {
-      addTodo(data)
-      setNewTodo('')
-    } else {
-      alert('할 일을 추가하는데 실패했습니다. 잠시 후 다시 시도해주세요')
-    }
+    const data = await createTodo(newTodo)
+    addTodo(data)
+    setNewTodo('')
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

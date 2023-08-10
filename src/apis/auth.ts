@@ -13,10 +13,15 @@ export const signUp = async ({ email, password }: SignParamsType) => {
       email,
       password,
     })
-    return response
+    return response.status
   } catch (error: unknown) {
     const axiosError = error as AxiosError
-    return axiosError.response
+    if (axiosError.response?.status === 400) {
+      const { message } = axiosError.response.data as { message: string }
+      alert(message)
+    } else {
+      alert('회원가입에 실패했습니다. 잠시 후 다시 시도해주세요')
+    }
   }
 }
 
@@ -27,9 +32,8 @@ export const signIn = async ({ email, password }: SignParamsType) => {
       password,
     })
     saveTokenToLocalStorage(`Bearer ${response.data.access_token}`)
-    return response
-  } catch (error: unknown) {
-    const axiosError = error as AxiosError
-    return axiosError.response
+    return response.status
+  } catch {
+    alert('로그인에 실패했습니다. 잠시 후 다시 시도해주세요')
   }
 }
