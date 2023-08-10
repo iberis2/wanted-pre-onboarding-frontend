@@ -24,9 +24,7 @@ export default function TodoItem({ initialTodo, initialCompleted, handleUpdate }
   const EditTodo = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    const target = event.target as HTMLFormElement
-    const isChecked = target.checkbox.checked
-    const status = await handleUpdate(task, isChecked)
+    const status = await handleUpdate(task, isCompleted)
     if (status === 200) {
       setIsEditing(false)
     }
