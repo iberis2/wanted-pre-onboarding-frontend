@@ -4,6 +4,7 @@ import AddTodo, { TodoItemType } from '../components/Todo/AddTodo'
 import { deleteTodo, getTodos, updateTodo } from '../apis/todo'
 import { TodoType } from '../components/Todo/AddTodo'
 import styles from './Todo.module.css'
+import LogOutButton from '../components/LogOutButton'
 
 export default function Todo() {
   const [todos, setTodos] = useState<TodoType>([])
@@ -30,6 +31,7 @@ export default function Todo() {
 
   return (
     <div className={styles.todo}>
+      <LogOutButton>로그아웃</LogOutButton>
       <AddTodo addTodo={addTodo} />
       <ul className={styles.ul}>
         {todos?.length ? (

@@ -21,10 +21,10 @@ export const getTokenFromLocalStorage = () => {
   return console.error(`it dose not have a browser storage`)
 }
 
-export const removeTokenFrom = () => {
+export const removeTokenFromLocalStorage = () => {
   if (isBrowser()) {
     try {
-      localStorage.remove('token')
+      localStorage.removeItem('token')
     } catch (error) {
       console.error('Error removing accessToken from local storage:', error)
     }

@@ -1,0 +1,11 @@
+.logOutButton {
+  border: none;
+  background-color: #ffff;
+  color: #4682a9;
+  font-size: 2rem;
+}
+
+.logOutButton:hover {
+  color: #91c8e4;
+  cursor: pointer;
+}
